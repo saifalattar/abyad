@@ -3,6 +3,7 @@ package com.example.abyad.Controller;
 import com.example.abyad.AbyadExceptions.AbyadExceptions;
 import com.example.abyad.Business.MagazinesServices;
 import com.example.abyad.Schemas.Magazine;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -42,7 +43,7 @@ public class AbyadMagazinesController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<HashMap<String , Object>> addNewMagazine(@RequestHeader(required = false) String token, @RequestBody(required = false) Magazine magazine){
+    public ResponseEntity<HashMap<String , Object>> addNewMagazine(@RequestHeader(required = false) String token, @Valid @RequestBody(required = false) Magazine magazine){
         try{
             magazinesServices.addNewMagazine(token, magazine);
             HashMap<String,Object> responseBody = new HashMap<String,Object>();

@@ -1,7 +1,6 @@
 package com.example.abyad.Business;
 
 import com.example.abyad.AbyadExceptions.AbyadExceptions;
-import com.example.abyad.AbyadExceptions.TypeOfException;
 import com.example.abyad.Database.MagazineDatabase;
 import com.example.abyad.Schemas.Magazine;
 import com.example.abyad.Shared.SharedFunctions;
@@ -23,7 +22,7 @@ public class MagazinesServices {
 
     public Magazine addNewMagazine(String token, Magazine magazine) throws AbyadExceptions{
         try{
-            if (token == null) throw abyadExceptions.setErrorKey("162025");
+            if (token.isEmpty()) throw abyadExceptions.setErrorKey("162025");
             if(magazine == null) throw abyadExceptions.setErrorKey("152025");
 
             if (SharedFunctions.isTokenValid(token)){
@@ -33,15 +32,12 @@ public class MagazinesServices {
             }
         } catch (JwtException e) {
             throw abyadExceptions.setErrorKey("WrongToken");
-        } catch (Exception e) {
-            throw abyadExceptions.setErrorKey("BadRequest");
         }
     }
 
     public void deleteMagazine(String token, UUID magazineID) throws AbyadExceptions{
         try{
-            if (token == null) throw abyadExceptions.setErrorKey("162025");
-
+            if (token.isEmpty()) throw abyadExceptions.setErrorKey("162025");
             if (SharedFunctions.isTokenValid(token)){
                 magazineDatabase.deleteById(magazineID);
             }else{
@@ -49,14 +45,12 @@ public class MagazinesServices {
             }
         } catch (JwtException e) {
             throw abyadExceptions.setErrorKey("WrongToken");
-        } catch (Exception e) {
-            throw abyadExceptions.setErrorKey("BadRequest");
         }
     }
 
     public List<Magazine> getAllMagazines(String token) throws AbyadExceptions{
         try{
-            if (token == null) throw abyadExceptions.setErrorKey("162025");
+            if (token.isEmpty()) throw abyadExceptions.setErrorKey("162025");
 
             if (SharedFunctions.isTokenValid(token)){
                 return magazineDatabase.findAll();
@@ -65,15 +59,12 @@ public class MagazinesServices {
             }
         } catch (JwtException e) {
             throw abyadExceptions.setErrorKey("WrongToken");
-        } catch (Exception e) {
-            throw abyadExceptions.setErrorKey("BadRequest");
         }
     }
 
     public List<Magazine> getMagazineByName(String token, String magazineName) throws AbyadExceptions{
         try{
-            if (token == null) throw abyadExceptions.setErrorKey("162025");
-
+            if (token.isEmpty()) throw abyadExceptions.setErrorKey("162025");
             if (SharedFunctions.isTokenValid(token)){
                 return magazineDatabase.findByNameLike("%"+magazineName+"%");
             }else{
@@ -81,8 +72,6 @@ public class MagazinesServices {
             }
         } catch (JwtException e) {
             throw abyadExceptions.setErrorKey("WrongToken");
-        } catch (Exception e) {
-            throw abyadExceptions.setErrorKey("BadRequest");
         }
     }
 }

@@ -20,6 +20,7 @@ public class ProductsServices {
     }
 
     public Product addNewProduct(String token, Product product) throws AbyadExceptions{
+        if (token.isEmpty()) throw abyadExceptions.setErrorKey("162025");
         try{
             if(SharedFunctions.isTokenValid(token)){
                 return productDatabase.save(product);
@@ -35,6 +36,7 @@ public class ProductsServices {
     }
 
     public List<Product> getAllProducts(String token) throws AbyadExceptions {
+        if (token.isEmpty()) throw abyadExceptions.setErrorKey("162025");
         try{
             if(SharedFunctions.isTokenValid(token)){
                 return productDatabase.findAll();
@@ -48,6 +50,7 @@ public class ProductsServices {
 
 
     public List<Product> getProductByName(String productName, String token) throws AbyadExceptions{
+        if (token.isEmpty()) throw abyadExceptions.setErrorKey("162025");
         try {
             if (SharedFunctions.isTokenValid(token)) {
                 return productDatabase.findByproductNameLike('%' + productName + '%');
@@ -62,6 +65,7 @@ public class ProductsServices {
     }
 
     public void deleteProductByID(String token , UUID id) throws AbyadExceptions{
+        if (token.isEmpty()) throw abyadExceptions.setErrorKey("162025");
         try {
             if (SharedFunctions.isTokenValid(token)) {
                 productDatabase.deleteById(id);
