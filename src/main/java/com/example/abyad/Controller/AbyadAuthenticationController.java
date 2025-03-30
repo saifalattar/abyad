@@ -8,7 +8,6 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -23,14 +22,14 @@ public class AbyadAuthenticationController {
     }
 
     @PostMapping(path = "/CreateAccount")
-    public ResponseEntity createNewUser(@Valid @RequestBody User user){
+    public ResponseEntity<HashMap<String, Object>> createNewUser(@Valid @RequestBody User user){
         try {
             HashMap<String, Object> response = new HashMap<String, Object>();
             String token = SharedFunctions.generateToken(services.createUser(user));
             response.put("userData", user.toUserResponseDTO());
             response.put("status", "201");
             response.put("token", token);
-            return new ResponseEntity(response, HttpStatus.CREATED);
+            return new ResponseEntity<HashMap<String, Object>>(response, HttpStatus.CREATED);
         } catch (AbyadExceptions e) {
             return e.getErrorMessage();
         }
