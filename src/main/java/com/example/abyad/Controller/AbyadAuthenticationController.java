@@ -1,17 +1,16 @@
 package com.example.abyad.Controller;
-import com.example.abyad.AbyadExceptions.AbyadErrorMapping;
 import com.example.abyad.AbyadExceptions.AbyadExceptions;
 import com.example.abyad.Business.AuthenticationServices;
 import com.example.abyad.Schemas.User;
 import com.example.abyad.Schemas.UserLoginRequestDTO;
 import com.example.abyad.Shared.SharedFunctions;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -35,6 +34,14 @@ public class AbyadAuthenticationController {
         } catch (AbyadExceptions e) {
             return e.getErrorMessage();
         }
+    }
+
+    @GetMapping("/test")
+    public Map test(@RequestHeader String headers){
+        HashMap<String, Object> response = new HashMap<String, Object>();
+        response.put("status", "201");
+        System.out.println("headers :   "+headers);
+        return response;
     }
 
     @PostMapping(path = "/LogIn")
