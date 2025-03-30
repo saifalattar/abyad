@@ -1,6 +1,7 @@
 package com.example.abyad;
 
 import com.example.abyad.AbyadExceptions.AbyadErrorMapping;
+import com.example.abyad.Schemas.Product;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,10 +10,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 class AbyadApplicationTests {
 
 	@Autowired
-    AbyadErrorMapping abyadProperties;
+	Properties properties;
 	@Test
 	void contextLoads() {
-		System.out.println(abyadProperties);
+		System.out.println(properties);
 	}
 
 }

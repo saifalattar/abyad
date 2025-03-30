@@ -4,6 +4,7 @@ import com.example.abyad.AbyadExceptions.AbyadExceptions;
 import com.example.abyad.Business.AuthenticationServices;
 import com.example.abyad.Business.ProductsServices;
 import com.example.abyad.Schemas.Product;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +35,7 @@ public class AbyadProductsController {
     }
 
     @PostMapping("/AddNewProduct")
-    public ResponseEntity<HashMap<String, Object>> addNewProduct(@RequestBody Product product, @RequestHeader String token){
+    public ResponseEntity<HashMap<String, Object>> addNewProduct(@Valid @RequestBody Product product, @RequestHeader String token){
         try {
             HashMap<String, Object> responseBody = new HashMap<String, Object>();
             responseBody.put("status", "201");

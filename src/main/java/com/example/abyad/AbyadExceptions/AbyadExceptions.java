@@ -27,7 +27,7 @@ public class AbyadExceptions extends Throwable {
     public ResponseEntity<HashMap<String , Object>> getErrorMessage(){
         Error error = this.abyadErrorMapping.error().get(errorKey);
         if(error == null){
-            error = new Error("NO KEY", "SOMETHING ERROR HAPPENED IN SERVER.", 500);
+            error = new Error("UNKNOWN", "SOMETHING ERROR HAPPENED IN SERVER.", 500);
         }
         HashMap<String , Object> responseBody = new HashMap<String , Object>();
         responseBody.put("errorCode", error.errorKey());
