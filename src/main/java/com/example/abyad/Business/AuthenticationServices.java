@@ -32,6 +32,10 @@ public class AuthenticationServices {
         this.cartsDatabase = cartsDatabase;
     }
 
+    public AbyadExceptions getAbyadExceptions(){
+        return this.abyadExceptions;
+    }
+
     public User createUser(User user) throws AbyadExceptions{
         try{
             return userDatabase.save(user);

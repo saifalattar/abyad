@@ -47,7 +47,7 @@ public class User {
     @Column
     @JsonIgnore
     @OneToMany(mappedBy = "user")
-    private Set<Carts> cart;
+    private Set<Carts> cart = new HashSet<>();
 //
 //    @JsonIgnore
 //    @Column(name = "products")

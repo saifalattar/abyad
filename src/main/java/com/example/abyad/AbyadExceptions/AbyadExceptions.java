@@ -8,15 +8,19 @@ import org.springframework.http.ResponseEntity;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 
-public class AbyadExceptions extends Throwable {
+public class AbyadExceptions extends Exception {
 
-    @Autowired
-    private AbyadErrorMapping abyadErrorMapping;
+    final private AbyadErrorMapping abyadErrorMapping;
 
     private String errorKey;
-    public AbyadExceptions(){
+    public AbyadExceptions(AbyadErrorMapping abyadErrorMapping){
         this.errorKey = null;
+        this.abyadErrorMapping = abyadErrorMapping;
 
+    }
+
+    public boolean hasErrorKey(){
+        return !errorKey.isEmpty();
     }
 
     public AbyadExceptions setErrorKey(String errorKey){

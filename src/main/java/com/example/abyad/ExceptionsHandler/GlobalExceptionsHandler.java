@@ -1,5 +1,6 @@
 package com.example.abyad.ExceptionsHandler;
 
+import com.example.abyad.AbyadExceptions.AbyadExceptions;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.ObjectError;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,7 +36,7 @@ public class GlobalExceptionsHandler {
         return new ResponseEntity<>(response, HttpStatusCode.valueOf(400));
     }
 
-    @ExceptionHandler(Exception.class)
+    @ExceptionHandler({Exception.class, RuntimeException.class})
     public ResponseEntity<?> unhandledGenerecExceptions(
             Exception exception
     ){
@@ -44,4 +46,13 @@ public class GlobalExceptionsHandler {
 
         return new ResponseEntity<>(response, HttpStatusCode.valueOf(400));
     }
+
+    @ExceptionHandler({AbyadExceptions.class})
+    public ResponseEntity<?> handleAbyadExceptions(
+            AbyadExceptions exception
+    ){
+      return exception.getErrorMessage();
+    }
+
+
 }
